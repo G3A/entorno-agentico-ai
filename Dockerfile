@@ -34,10 +34,13 @@ RUN brew update && \
     brew install anomalyco/tap/opencode && \
     opencode models --refresh && \ 
     brew install Gentleman-Programming/tap/gentle-ai && \
-    brew install go && \
-    mkdir -p /home/developer/.config/opencode/ && \
-    sudo chown -R developer:developer /home/developer/.config/opencode/ && \
-    chmod -R 755 /home/developer
+    brew install go 
+    
+# ... (después de instalar opencode)
+RUN mkdir -p /home/developer/.config/opencode && \
+    # Usar sudo aquí para asegurar que el cambio ocurra sobre cualquier residuo
+    sudo chown -R developer:developer /home/developer && \
+    chmod -R 777 /home/developer/.config/opencode    
 
 # Configurar el entorno para cada vez que inicies sesión
 RUN echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/developer/.bashrc
