@@ -1,0 +1,27 @@
+services:
+  ai-dev:
+    build: .
+    container_name: entorno-agentico
+    tty: true
+    stdin_open: true
+    env_file: .env
+    environment:
+      - TERM=xterm-256color
+      # Todas las API Keys se cargan desde el .env
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - DEEPSEEK_API_KEY=${DEEPSEEK_API_KEY}
+      - MISTRAL_API_KEY=${MISTRAL_API_KEY}
+      - GROQ_API_KEY=${GROQ_API_KEY}
+    volumes:
+      # Carpetas locales en tu Windows (interoperabilidad)
+      - ./workspace:/home/developer/workspace
+      - ./config/.engram:/home/developer/.engram
+      - ./config/.gentle-ai/backups:/home/developer/.gentle-ai/backups
+      - ./config/opencode:/home/developer/.config/opencode
+      # Volumen interno para Brew (mejor rendimiento)
+      - brew_data_bunker:/home/linuxbrew/.linuxbrew
+
+volumes:
+  brew_data_bunker:
