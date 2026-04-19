@@ -31,8 +31,6 @@ RUN echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"' >> /home/devel
 # 5. Instalamos opencode y el paquete que contiene el ambiente agentico (gentle-ai)
 # Forzamos la actualización de brew antes de instalar para evitar errores de clonación
 RUN brew update && \
-    brew install anomalyco/tap/opencode && \
-    opencode models --refresh && \ 
     brew install Gentleman-Programming/tap/gentle-ai && \
     brew install go 
     
